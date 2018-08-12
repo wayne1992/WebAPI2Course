@@ -12,6 +12,7 @@ using WebAPI2.Models;
 
 namespace WebAPI2.Controllers
 {
+    [RoutePrefix("Products")]
     public class ProductsController : ApiController
     {
         private Fabrics2012Entities db = new Fabrics2012Entities();
@@ -23,6 +24,11 @@ namespace WebAPI2.Controllers
             db.Configuration.LazyLoadingEnabled = false;
         }
         // GET: api/Products
+        /// <summary>
+        /// 取得所有產品前10筆
+        /// </summary>
+        /// <returns></returns>
+        [Route("")]
         public IQueryable<Product> GetProduct()
         {
             return db.Product.Take(10);
@@ -30,6 +36,7 @@ namespace WebAPI2.Controllers
 
         // GET: api/Products/5
         [ResponseType(typeof(Product))]
+        [Route("{id}")]
         public IHttpActionResult GetProduct(int id)
         {
             Product product = db.Product.Find(id);
@@ -43,6 +50,7 @@ namespace WebAPI2.Controllers
 
         // PUT: api/Products/5
         [ResponseType(typeof(void))]
+        [Route("{id}")]
         public IHttpActionResult PutProduct(int id, Product product)
         {
             if (!ModelState.IsValid)
@@ -78,6 +86,7 @@ namespace WebAPI2.Controllers
 
         // POST: api/Products
         [ResponseType(typeof(Product))]
+        [Route("")]
         public IHttpActionResult PostProduct(Product product)
         {
             if (!ModelState.IsValid)
@@ -93,6 +102,7 @@ namespace WebAPI2.Controllers
 
         // DELETE: api/Products/5
         [ResponseType(typeof(Product))]
+        [Route("{id}")]
         public IHttpActionResult DeleteProduct(int id)
         {
             Product product = db.Product.Find(id);
