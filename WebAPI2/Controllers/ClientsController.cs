@@ -8,8 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using WebAPI2.Models;
-
+using WebAPI2.Models;
 namespace WebAPI2.Controllers
 {
     [RoutePrefix("clients")]
@@ -22,32 +21,38 @@ namespace WebAPI2.Controllers
         }
         // GET: api/Clients
         [Route("")]
-        public IQueryable<Client> GetClient()
+        public IHttpActionResult GetClient()
         {
-            return db.Client.Take(5);
+            return Ok(db.Client.Take(5));
         }
 
         // GET: api/Clients/5
         [ResponseType(typeof(Client))]
         [Route("{id}", Name = nameof(GetClientById))]
-        public IHttpActionResult GetClientById(int id)
+        [HttpPost]
+        public HttpResponseMessage GetClientById([FromBody] int id)
         {
             Client client = db.Client.Find(id);
             if (client == null)
             {
-                return NotFound();
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
-            return Ok(client);
+            return Request.CreateResponse(client);
         }
 
         [ResponseType(typeof(Client))]
         [Route("{id}/order")]
-        public IHttpActionResult GetClientOrders(int id)
+        public HttpResponseMessage GetClientOrders(int id)
         {
-            var orders = db.Order.Where(p => p.ClientId == id).ToList();
+            var orders = db.Order.Where(p => p.ClientId == id);
 
-            return Ok(orders);
+            return new HttpResponseMessage
+            {
+                ReasonPhrase = "HelloWorld",
+                StatusCode = HttpStatusCode.OK,
+                Content = new ObjectContent<IQueryable<Order>>(orders, GlobalConfiguration.Configuration.Formatters.JsonFormatter)
+            };
         }
 
         [ResponseType(typeof(Client))]
