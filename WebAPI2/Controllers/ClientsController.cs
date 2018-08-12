@@ -41,6 +41,35 @@ namespace WebAPI2.Controllers
             return Ok(client);
         }
 
+        [ResponseType(typeof(Client))]
+        [Route("{id}/order")]
+        public IHttpActionResult GetClientOrders(int id)
+        {
+            var orders = db.Order.Where(p => p.ClientId == id).ToList();
+
+            return Ok(orders);
+        }
+
+        [ResponseType(typeof(Client))]
+        [Route("{id}/order/{date:datetime}")]
+        public IHttpActionResult GetClientOrdersByDate1(int id, DateTime date)
+        {
+            var nextDay = date.AddDays(1);
+            var orders = db.Order.Where(p => p.ClientId == id && p.OrderDate >= date && p.OrderDate < nextDay).ToList();
+
+            return Ok(orders);
+        }
+
+        [ResponseType(typeof(Client))]
+        [Route("{id}/order/{*date:datetime}")]
+        public IHttpActionResult GetClientOrdersByDate2(int id, DateTime date)
+        {
+            var nextDay = date.AddDays(1);
+            var orders = db.Order.Where(p => p.ClientId == id && p.OrderDate >= date && p.OrderDate < nextDay).ToList();
+
+            return Ok(orders);
+        }
+
         // PUT: api/Clients/5
         [ResponseType(typeof(void))]
         [Route("{id}")]
