@@ -12,58 +12,51 @@ using WebAPI2.Models;
 
 namespace WebAPI2.Controllers
 {
-    [RoutePrefix("products")]
-    public class ProductsController : ApiController
+    [RoutePrefix("clients")]
+    public class ClientsController : ApiController
     {
         private Fabrics2012Entities db = new Fabrics2012Entities();
 
-        public ProductsController()
-        {
-
-            //關閉Entities延遲載入，將停止使用導覽屬性
+        public ClientsController() {
             db.Configuration.LazyLoadingEnabled = false;
         }
-        // GET: api/Products
-        /// <summary>
-        /// 取得所有產品前10筆
-        /// </summary>
-        /// <returns></returns>
+        // GET: api/Clients
         [Route("")]
-        public IQueryable<Product> GetProduct()
+        public IQueryable<Client> GetClient()
         {
-            return db.Product.Take(10);
+            return db.Client.Take(5);
         }
 
-        // GET: api/Products/5
-        [ResponseType(typeof(Product))]
-        [Route("{id}", Name = nameof(GetProduct))]
-        public IHttpActionResult GetProduct(int id)
+        // GET: api/Clients/5
+        [ResponseType(typeof(Client))]
+        [Route("{id}", Name = nameof(GetClientById))]
+        public IHttpActionResult GetClientById(int id)
         {
-            Product product = db.Product.Find(id);
-            if (product == null)
+            Client client = db.Client.Find(id);
+            if (client == null)
             {
                 return NotFound();
             }
 
-            return Ok(product);
+            return Ok(client);
         }
 
-        // PUT: api/Products/5
+        // PUT: api/Clients/5
         [ResponseType(typeof(void))]
         [Route("{id}")]
-        public IHttpActionResult PutProduct(int id, Product product)
+        public IHttpActionResult PutClient(int id, Client client)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != product.ProductId)
+            if (id != client.ClientId)
             {
                 return BadRequest();
             }
 
-            db.Entry(product).State = EntityState.Modified;
+            db.Entry(client).State = EntityState.Modified;
 
             try
             {
@@ -71,7 +64,7 @@ namespace WebAPI2.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductExists(id))
+                if (!ClientExists(id))
                 {
                     return NotFound();
                 }
@@ -84,37 +77,37 @@ namespace WebAPI2.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Products
-        [ResponseType(typeof(Product))]
+        // POST: api/Clients
+        [ResponseType(typeof(Client))]
         [Route("")]
-        public IHttpActionResult PostProduct(Product product)
+        public IHttpActionResult PostClient(Client client)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Product.Add(product);
+            db.Client.Add(client);
             db.SaveChanges();
 
-            return CreatedAtRoute(nameof(GetProduct), new { id = product.ProductId }, product);
+            return CreatedAtRoute(nameof(GetClientById), new { id = client.ClientId }, client);
         }
 
-        // DELETE: api/Products/5
-        [ResponseType(typeof(Product))]
+        // DELETE: api/Clients/5
+        [ResponseType(typeof(Client))]
         [Route("{id}")]
-        public IHttpActionResult DeleteProduct(int id)
+        public IHttpActionResult DeleteClient(int id)
         {
-            Product product = db.Product.Find(id);
-            if (product == null)
+            Client client = db.Client.Find(id);
+            if (client == null)
             {
                 return NotFound();
             }
 
-            db.Product.Remove(product);
+            db.Client.Remove(client);
             db.SaveChanges();
 
-            return Ok(product);
+            return Ok(client);
         }
 
         protected override void Dispose(bool disposing)
@@ -126,9 +119,9 @@ namespace WebAPI2.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ProductExists(int id)
+        private bool ClientExists(int id)
         {
-            return db.Product.Count(e => e.ProductId == id) > 0;
+            return db.Client.Count(e => e.ClientId == id) > 0;
         }
     }
 }
