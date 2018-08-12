@@ -194,6 +194,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\CustomerExAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -203,6 +204,7 @@
     <Compile Include="Models\Client.cs">
       <DependentUpon>Fabrics2012.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomerVM.cs" />
     <Compile Include="Models\Fabrics2012.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

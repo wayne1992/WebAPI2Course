@@ -11,6 +11,7 @@ using System.Web.Http.Description;
 using WebAPI2.Models;
 namespace WebAPI2.Controllers
 {
+    [CustomerEx]
     [RoutePrefix("clients")]
     public class ClientsController : ApiController
     {
@@ -29,12 +30,12 @@ namespace WebAPI2.Controllers
         // GET: api/Clients/5
         [ResponseType(typeof(Client))]
         [Route("{id}", Name = nameof(GetClientById))]
-        [HttpPost]
-        public HttpResponseMessage GetClientById([FromBody] int id)
+        public HttpResponseMessage GetClientById(int id)
         {
             Client client = db.Client.Find(id);
             if (client == null)
             {
+                throw new AggregateException("GG");
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 

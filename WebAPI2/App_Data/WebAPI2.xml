@@ -481,6 +481,11 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="T:WebAPI2.Controllers.CustomerExAttribute">
+            <summary>
+            客製化錯誤訊息Filter
+            </summary>
+        </member>
         <member name="M:WebAPI2.Controllers.ProductsController.GetProduct">
             <summary>
             取得所有產品前10筆
