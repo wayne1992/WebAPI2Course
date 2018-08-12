@@ -7,12 +7,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using WebAPI2.Models;
 namespace WebAPI2.Controllers
 {
     [CustomerEx]
     [RoutePrefix("clients")]
+    [EnableCors("*","*","get,post,put")]
     public class ClientsController : ApiController
     {
         private Fabrics2012Entities db = new Fabrics2012Entities();

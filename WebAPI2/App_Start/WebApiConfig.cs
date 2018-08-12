@@ -12,6 +12,7 @@ namespace WebAPI2
         {
             // Web API 設定和服務
             config.Filters.Add(new CustomerExAttribute());
+            config.EnableCors();
             // Web API 路由
             config.MapHttpAttributeRoutes();
 
