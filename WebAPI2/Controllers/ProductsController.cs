@@ -36,7 +36,7 @@ namespace WebAPI2.Controllers
 
         // GET: api/Products/5
         [ResponseType(typeof(Product))]
-        [Route("{id}")]
+        [Route("{id}", Name = nameof(GetProduct))]
         public IHttpActionResult GetProduct(int id)
         {
             Product product = db.Product.Find(id);
@@ -97,7 +97,7 @@ namespace WebAPI2.Controllers
             db.Product.Add(product);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = product.ProductId }, product);
+            return CreatedAtRoute(nameof(GetProduct), new { id = product.ProductId }, product);
         }
 
         // DELETE: api/Products/5
