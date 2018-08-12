@@ -16,6 +16,12 @@ namespace WebAPI2.Controllers
     {
         private Fabrics2012Entities db = new Fabrics2012Entities();
 
+        public ProductsController()
+        {
+
+            //關閉Entities延遲載入，將停止使用導覽屬性
+            db.Configuration.LazyLoadingEnabled = false;
+        }
         // GET: api/Products
         public IQueryable<Product> GetProduct()
         {
