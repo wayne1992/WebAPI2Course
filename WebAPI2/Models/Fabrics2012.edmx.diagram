@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cf67e5df956d48db8231336f711c7c71" Name="Diagram1">
+        <EntityTypeShape EntityType="Fabrics2012Model.Client" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Fabrics2012Model.Occupation" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Fabrics2012Model.Order" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Fabrics2012Model.OrderLine" Width="1.5" PointX="7.5" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Fabrics2012Model.Product" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <AssociationConnector Association="Fabrics2012Model.FK_Client_Occupation" ManuallyRouted="false" />
+        <AssociationConnector Association="Fabrics2012Model.fk_Order_ClientId" ManuallyRouted="false" />
+        <AssociationConnector Association="Fabrics2012Model.fk_OrderLine_OrderId" ManuallyRouted="false" />
+        <AssociationConnector Association="Fabrics2012Model.fk_OrderLine_ProductId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
